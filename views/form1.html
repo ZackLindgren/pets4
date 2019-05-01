@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pet Form</title>
+</head>
+<body>
+    <form method="post" action="#">
+        <label>
+            Animal
+            <check if="{{isset(@errors['animal'])}}">
+                <p>{{@errors['animal']}}</p>
+            </check>
+            <input type="text" name="animal">
+        </label>
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>
