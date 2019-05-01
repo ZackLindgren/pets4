@@ -10,10 +10,19 @@
         <label>
             Animal
             <check if="{{isset(@errors['animal'])}}">
-                <p>{{@errors['animal']}}</p>
+                <span>{{@errors['animal']}}</span>
             </check>
             <input type="text" name="animal">
         </label>
+
+        <label>
+            Quantity
+        <input type="text" name="qty" value="{{ @qty }}">
+        <check if="{{ @errors['qty'] }}">
+            <span class="err">{{ @errors['qty'] }}</span>
+        </check>
+        </label>
+
         <input type="submit" value="Next">
     </form>
 </body>

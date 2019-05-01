@@ -68,20 +68,29 @@ $f3->route('GET|POST /order', function ($f3)
     // clearing from previous sessions
     $_SESSION = array();
 
-    if (!empty($_POST['animal']))
-    {
-        $animal = $_POST['animal'];
 
-        if(validString($animal))
+
+
+    if(!empty($_POST))
+    {
+        $animal = $_POST ["animal"];
+        $qty = $_POST ["qty"];
+
+        $f3->set('animal',$animal);
+        $f3->set('qty',$qty);
+
+        if(validForm1())
         {
             $_SESSION['animal'] = $animal;
-            $f3->reroute('/order2');
+            $_SESSION["qty"] = $qty;
+
+            $f3->reroute("views/form2.html");
+
         }
-        else
-        {
-            $f3->set("errors['animal']", "Please enter an animal.");
-        }
+
+
     }
+
 
     $view=new Template();
     echo $view->render( 'views/form1.html');
