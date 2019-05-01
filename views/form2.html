@@ -12,7 +12,11 @@
             <check if="{{isset(@errors['colors'])}}">
                 <p>{{@errors['colors']}}</p>
             </check>
-            <input type="text" name="color">
+            <select name="color">
+                <repeat group="{{ @colors }}" value="{{ @colorOption }}">
+                    <option> {{ @colorOption }}</option>
+                </repeat>
+            </select>
         </label>
         <input type="submit" value="Submit">
     </form>
