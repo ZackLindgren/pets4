@@ -11,6 +11,7 @@ require_once('vendor/autoload.php');
 //Create an instance of the Base class
 $f3 = Base::instance();
 $f3->set('colors', array('pink','green', 'blue'));
+$f3->set('validToys', array('squeaky', 'bone', 'plushy', 'rope'));
 
 // Turn on Fat-Free error reporting
 $f3->set('DEBUG', 3);
@@ -26,7 +27,6 @@ $f3 ->route('GET /', function()
 });
 
 //define a route
-
 $f3 ->route('GET /@animal', function($f3,$params)
 {
     $animal= $params ['animal'];
@@ -61,15 +61,11 @@ $f3 ->route('GET /@animal', function($f3,$params)
 
 });
 
-
 //define route  order 1
 $f3->route('GET|POST /order', function ($f3)
 {
     // clearing from previous sessions
     $_SESSION = array();
-
-
-
 
     if(!empty($_POST))
     {
@@ -84,34 +80,31 @@ $f3->route('GET|POST /order', function ($f3)
             $_SESSION['animal'] = $animal;
             $_SESSION["qty"] = $qty;
 
-            $f3->reroute("views/form2.html");
-
+            $f3->reroute("order2");
         }
-
-
     }
-
 
     $view=new Template();
     echo $view->render( 'views/form1.html');
 });
 
-
 //define route  order 2
 $f3->route('GET|POST /order2', function ($f3)
 {
-    if (!empty($_POST['color']))
+    if (!empty($_POST))
     {
         $color = $_POST['color'];
+        $toys = $_POST['toys'];
 
-        if(validColor($color))
+        $f3->set('color', $color);
+        $f3->set('toys', $toys);
+
+        if(validForm2())
         {
             $_SESSION['color'] = $color;
+            $_SESSION['toys'] = $toys;
+
             $f3->reroute('/results');
-        }
-        else
-        {
-            $f3->set("errors['colors']", "Please enter a color.");
         }
     }
 
@@ -120,13 +113,11 @@ $f3->route('GET|POST /order2', function ($f3)
 });
 
 //define route  order 2
-
 $f3->route('GET|POST /results', function ()
 {
     $view=new Template();
     echo $view->render( 'views/results.html');
 });
-
 
 //Run fat free
 $f3 ->run();

@@ -9,18 +9,20 @@
     <form method="post" action="#">
         <label>
             Animal
+            <input type="text" name="animal" value="{{ @animal }}">
+
             <check if="{{isset(@errors['animal'])}}">
                 <span>{{@errors['animal']}}</span>
             </check>
-            <input type="text" name="animal">
         </label>
 
         <label>
             Quantity
-        <input type="text" name="qty" value="{{ @qty }}">
-        <check if="{{ @errors['qty'] }}">
-            <span class="err">{{ @errors['qty'] }}</span>
-        </check>
+            <input type="text" name="qty" value="{{ @qty }}">
+
+            <check if="{{ @errors['qty'] }}">
+                <span class="err">{{ @errors['qty'] }}</span>
+            </check>
         </label>
 
         <input type="submit" value="Next">

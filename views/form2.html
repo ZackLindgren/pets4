@@ -10,7 +10,7 @@
         <label>
             Color
             <check if="{{isset(@errors['colors'])}}">
-                <p>{{@errors['colors']}}</p>
+                <span>{{@errors['colors']}}</span>
             </check>
             <select name="color">
                 <repeat group="{{ @colors }}" value="{{ @colorOption }}">
@@ -18,6 +18,22 @@
                 </repeat>
             </select>
         </label>
+
+        <p>Select Toys
+            <check if="{{ @errors['toys'] }}">
+                <span>  {{ @errors['toys'] }}</span>
+            </check><br>
+            <repeat group="{{ @validToys }}" value="{{ @toy }}">
+                <label>
+                    <input type="checkbox" name="toys[]" value="{{ @toy }}"
+                    <check if="{{ !empty(@toys) && in_array(@toy, @toys) }}">
+                        checked="checked"
+                    </check>
+                    >
+                    {{ @toy }}
+                </label><br>
+            </repeat>
+        </p>
         <input type="submit" value="Submit">
     </form>
 </body>
