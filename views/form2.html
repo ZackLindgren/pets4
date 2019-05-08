@@ -13,6 +13,8 @@
                 <span>{{@errors['colors']}}</span>
             </check>
             <select name="color">
+                <option>Please select a color:</option>
+
                 <repeat group="{{ @colors }}" value="{{ @colorOption }}">
                     <option> {{ @colorOption }}</option>
                 </repeat>
